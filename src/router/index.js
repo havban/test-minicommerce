@@ -1,8 +1,5 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-
-Vue.use(VueRouter)
 
 const routes = [
   {
@@ -14,30 +11,29 @@ const routes = [
     path: '/product/:product_id',
     name: 'Product',
     // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
+    // this generates a separate chunk for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "product" */ '../views/Product.vue')
+    component: () => import('../views/Product.vue')
   },
   {
     path: '/cart',
     name: 'Cart',
-    component: () => import(/* webpackChunkName: "cart" */ '../views/Cart.vue')
+    component: () => import('../views/Cart.vue')
   },
   {
     path: '/checkout',
     name: 'Checkout',
-    component: () => import(/* webpackChunkName: "checkout" */ '../views/Checkout.vue')
+    component: () => import('../views/Checkout.vue')
   },
   {
     path: '/thankyou',
     name: 'Thankyou',
-    component: () => import(/* webpackChunkName: "thankyou" */ '../views/Thankyou.vue')
+    component: () => import('../views/Thankyou.vue')
   }
 ]
 
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes
 })
 

@@ -1,26 +1,21 @@
-describe('ProductList Pages', () => {
-    beforeEach(async () => {
-        await page.goto('http://localhost:8080/')
-    })
+import { test, expect } from '@playwright/test'
 
-    test('should load', async () => {
-        await expect(page).toHaveText("#nav > .nav-home", "Home");
+test.describe('ProductList Pages', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('/')
+  })
 
-        // Take the screenshot of the page with playwright
-        const image = await page.screenshot({ fullPage: true });
+  test('should load', async ({ page }) => {
+    await expect(page.locator('#nav > .nav-home')).toHaveText('Home')
 
-        // Compare the taken screenshot with the baseline screenshot (if exists), or create it (else)
-        await expect(image).toMatchImageSnapshot();
-    });
+    // Compare a full-page screenshot with the baseline (created on first run)
+    await expect(page).toHaveScreenshot('should-load.png', { fullPage: true })
+  })
 
-    test('click product2 and snapshot', async () => {
-        await page.click('.hello > .products-wrapper > .product-block:nth-child(2) > .product-image > img')
+  test('click product2 and snapshot', async ({ page }) => {
+    await page.click('.hello > .products-wrapper > .product-block:nth-child(2) > .product-image > img')
+    await expect(page.locator('#product-title')).toBeVisible()
 
-        // Take the screenshot of the page with playwright
-        const image = await page.screenshot({ fullPage: true });
-
-        // Compare the taken screenshot with the baseline screenshot (if exists), or create it (else)
-        await expect(image).toMatchImageSnapshot();
-    });
-
+    await expect(page).toHaveScreenshot('click-product-2.png', { fullPage: true })
+  })
 })

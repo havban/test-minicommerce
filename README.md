@@ -1,30 +1,53 @@
-# future2021
+# test-minicommerce
+
+Vue 3 + Vite mini-commerce demo (PWA via `vite-plugin-pwa`), Vuex 4, Vue Router, axios with an in-app mock API (`src/api-mock`).
+
+Requires [Bun](https://bun.sh).
 
 ## Project setup
 ```
-npm install
+bun install
 ```
 
-### Compiles and hot-reloads for development
+### Compiles and hot-reloads for development (http://localhost:8080)
 ```
-npm run serve
+bun run serve
 ```
 
 ### Compiles and minifies for production
 ```
-npm run build
+bun run build
 ```
 
-### Run your unit tests
+### Serve the production build (http://localhost:8080)
 ```
-npm run test:unit
+bun run start
 ```
 
-### Lints and fixes files
+### Run your unit tests (Vitest)
 ```
-npm run lint
+bun run test:unit
+```
+
+### Run the integration tests (Playwright, Chromium)
+```
+bun run test
+```
+Playwright starts its own dev server on port 5199 (override with `E2E_PORT`).
+No `playwright install` is needed when a Chromium is already available: the config uses
+`CHROMIUM_PATH` if set, otherwise `/opt/pw-browsers/chromium` when it exists, otherwise
+Playwright's own browser cache. Screenshot baselines live in
+`tests/integration/__screenshots__`; refresh them with `bun run test:update-snapshots`.
+
+### Lints files
+```
+bun run lint
+```
+
+### Security audit
+```
+bun audit
 ```
 
 ### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-# test-minicommerce
+See [Vite Configuration Reference](https://vite.dev/config/).

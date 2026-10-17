@@ -23,3 +23,9 @@ pnpm-debug.log*
 *.sw?
 .nyc_output/*
 coverage
+
+# Playwright / PWA dev output
+/test-results/
+/playwright-report/
+/blob-report/
+/dev-dist/
